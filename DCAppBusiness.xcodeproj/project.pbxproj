@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		23FB12D4079FF7A962B1E5D5 /* Pods_DCAppBusiness.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 256C61E4729A9EA44DD4B60E /* Pods_DCAppBusiness.framework */; };
+		6EA71B432048FF0D006E2E77 /* greencheckmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EA71B412048FF0C006E2E77 /* greencheckmark.png */; };
+		6EA71B442048FF0D006E2E77 /* redx.png in Resources */ = {isa = PBXBuildFile; fileRef = 6EA71B422048FF0D006E2E77 /* redx.png */; };
 		F4F09DB71DAF669400026BB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F09DB61DAF669400026BB2 /* AppDelegate.swift */; };
 		F4F09DBC1DAF669400026BB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4F09DBA1DAF669400026BB2 /* Main.storyboard */; };
 		F4F09DBE1DAF669400026BB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4F09DBD1DAF669400026BB2 /* Assets.xcassets */; };
@@ -16,6 +19,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		256C61E4729A9EA44DD4B60E /* Pods_DCAppBusiness.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DCAppBusiness.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F6ACE9C921E280029162374 /* Pods-DCAppBusiness.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DCAppBusiness.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DCAppBusiness/Pods-DCAppBusiness.debug.xcconfig"; sourceTree = "<group>"; };
+		31737747F9DAF3D3312939E4 /* Pods-DCAppBusiness.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DCAppBusiness.release.xcconfig"; path = "Pods/Target Support Files/Pods-DCAppBusiness/Pods-DCAppBusiness.release.xcconfig"; sourceTree = "<group>"; };
+		6EA71B412048FF0C006E2E77 /* greencheckmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greencheckmark.png; sourceTree = "<group>"; };
+		6EA71B422048FF0D006E2E77 /* redx.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redx.png; sourceTree = "<group>"; };
 		F4F09DB31DAF669400026BB2 /* DCAppBusiness.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DCAppBusiness.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F09DB61DAF669400026BB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4F09DBB1DAF669400026BB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -31,17 +39,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23FB12D4079FF7A962B1E5D5 /* Pods_DCAppBusiness.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3BFCE2D67C5260D54993F479 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				256C61E4729A9EA44DD4B60E /* Pods_DCAppBusiness.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F0B9CF483F3336559A40D47C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2F6ACE9C921E280029162374 /* Pods-DCAppBusiness.debug.xcconfig */,
+				31737747F9DAF3D3312939E4 /* Pods-DCAppBusiness.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F4F09DAA1DAF669400026BB2 = {
 			isa = PBXGroup;
 			children = (
 				F4F09DB51DAF669400026BB2 /* DCAppBusiness */,
 				F4F09DB41DAF669400026BB2 /* Products */,
+				F0B9CF483F3336559A40D47C /* Pods */,
+				3BFCE2D67C5260D54993F479 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +84,8 @@
 		F4F09DB51DAF669400026BB2 /* DCAppBusiness */ = {
 			isa = PBXGroup;
 			children = (
+				6EA71B412048FF0C006E2E77 /* greencheckmark.png */,
+				6EA71B422048FF0D006E2E77 /* redx.png */,
 				F4F09DB61DAF669400026BB2 /* AppDelegate.swift */,
 				F4F09DBA1DAF669400026BB2 /* Main.storyboard */,
 				F4F09DBD1DAF669400026BB2 /* Assets.xcassets */,
@@ -74,9 +104,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F4F09DC51DAF669400026BB2 /* Build configuration list for PBXNativeTarget "DCAppBusiness" */;
 			buildPhases = (
+				44690BE0D89B83C821E3F208 /* [CP] Check Pods Manifest.lock */,
 				F4F09DAF1DAF669400026BB2 /* Sources */,
 				F4F09DB01DAF669400026BB2 /* Frameworks */,
 				F4F09DB11DAF669400026BB2 /* Resources */,
+				755D6BD09FC13238B2BDB677 /* [CP] Embed Pods Frameworks */,
+				1A88A62C17F28F4D714528B3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -129,12 +162,68 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4F09DC11DAF669400026BB2 /* LaunchScreen.storyboard in Resources */,
+				6EA71B442048FF0D006E2E77 /* redx.png in Resources */,
 				F4F09DBE1DAF669400026BB2 /* Assets.xcassets in Resources */,
 				F4F09DBC1DAF669400026BB2 /* Main.storyboard in Resources */,
+				6EA71B432048FF0D006E2E77 /* greencheckmark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1A88A62C17F28F4D714528B3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DCAppBusiness/Pods-DCAppBusiness-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		44690BE0D89B83C821E3F208 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DCAppBusiness-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		755D6BD09FC13238B2BDB677 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-DCAppBusiness/Pods-DCAppBusiness-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DCAppBusiness/Pods-DCAppBusiness-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F4F09DAF1DAF669400026BB2 /* Sources */ = {
@@ -278,6 +367,7 @@
 		};
 		F4F09DC61DAF669400026BB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2F6ACE9C921E280029162374 /* Pods-DCAppBusiness.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 95NG46Q3EM;
@@ -292,6 +382,7 @@
 		};
 		F4F09DC71DAF669400026BB2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 31737747F9DAF3D3312939E4 /* Pods-DCAppBusiness.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 95NG46Q3EM;

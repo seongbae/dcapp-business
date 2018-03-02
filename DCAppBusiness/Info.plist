@@ -53,6 +53,11 @@
 	</array>
 	<key>NSCameraUsageDescription</key>
 	<string>We need to access your camera for scanning QR code.</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 </dict>

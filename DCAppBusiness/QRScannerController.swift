@@ -1,13 +1,6 @@
-//
-//  QRScannerController.swift
-//  QRCodeReader
-//
-//  Created by Simon Ng on 13/10/2016.
-//  Copyright © 2016 AppCoda. All rights reserved.
-//
-
 import UIKit
 import AVFoundation
+import Alamofire
 
 class QRScannerController: UIViewController {
 
@@ -37,7 +30,7 @@ class QRScannerController: UIViewController {
         super.viewDidLoad()
 
         // Get the back-facing camera for capturing videos
-        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInDualCamera], mediaType: AVMediaType.video, position: .back)
+        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: AVMediaType.video, position: .back)
         
         guard let captureDevice = deviceDiscoverySession.devices.first else {
             print("Failed to get the camera device")
@@ -103,12 +96,68 @@ class QRScannerController: UIViewController {
             return
         }
         
-        let alertPrompt = UIAlertController(title: "Open App", message: "You're going to open \(decodedURL)", preferredStyle: .actionSheet)
+        let alertPrompt = UIAlertController(title: "Validate Coupon", message: "Are you sure?", preferredStyle: .actionSheet)
         let confirmAction = UIAlertAction(title: "Confirm", style: UIAlertActionStyle.default, handler: { (action) -> Void in
+            var couponStatus = ""
+            var couponMessage = ""
             
             if let url = URL(string: decodedURL) {
-                if UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                var dict = [String:String]()
+                let components = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+                if let queryItems = components.queryItems {
+                    for item in queryItems {
+                        dict[item.name] = item.value!
+                    }
+                }
+                
+                let headers: HTTPHeaders = [
+                    "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik1UVkNSVFV3TXpWRVFqWkZPRGMyTUVNeE4wSTFPREV3Umpnd05qVkRNalU1TmtJNE16ZEJPUSJ9.eyJpc3MiOiJodHRwczovL2RjYXBwYXV0aC5hdXRoMC5jb20vIiwic3ViIjoiS2lHY2FIVmVaY0dvTWUzTmNVTlpUVlFlNnZORUxJUFVAY2xpZW50cyIsImF1ZCI6Imh0dHBzOi8vZGNhcHBjb3Vwb25zYXBpLmNvbSIsImlhdCI6MTUxOTI3NzcwOSwiZXhwIjoxNTE5MzY0MTA5LCJhenAiOiJLaUdjYUhWZVpjR29NZTNOY1VOWlRWUWU2dk5FTElQVSIsImd0eSI6ImNsaWVudC1jcmVkZW50aWFscyJ9.toIDOiGf5qvZqdcj9dSFJAxqmbE7F_enJu_F-tfc4VZ6c68YbOJcJYskdnBcAosC_u88P5r8quLqOw6lq_113Q4ypTXrIaSgW6HAIFhQI8lEKpfyJgkMsAuiU1QOyBbmmKTGl5G2tFrg8TWaHIYakmazBBKG-0FEQptfk0pZdz8-wsdOydxFJO0RM1JZJeUaCgGI6nWovhBz924gYB2Wm6TWLNt4POdzrRcgEhUSMPgqph1QcjOpzLC_fzHz1xEe9Bw5OTdHjJT32LEWg9Gbxp1ZrdSlxcUl76SAmKKXlJY2uTbVImeNqebwfWjW0fCwWOtfHDicWHvmJxruDT6QOQ"
+                ]
+                
+                let parameters: Parameters = [
+                    "uniqueid": dict["uniqueid"],
+                    "businessid": dict["businessid"],
+                    "couponid": dict["couponid"]
+                ]
+                
+                Alamofire.request("http://coupons.dcapp.org/api/validate", method: .post, parameters: parameters,encoding: JSONEncoding.default, headers: headers).validate(statusCode: 201..<300).responseJSON {
+                    response in
+                    //debugPrint(response)
+                    
+                    var statusCode = response.response?.statusCode
+                    debugPrint(statusCode)
+                    
+                    var imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+                    
+                    // if server returns 201 status code, the coupon is valid
+                    // if server returns 200 status code, the coupon is already used
+                    // for any other code, display invalid message
+                    if (statusCode == 201)
+                    {
+                        couponStatus = "Coupon is good"
+                        couponMessage = "15% off on Jja Jang Myun"  // will eventually be replaced with whatever message that comes back from server
+                        imageView.image = UIImage(named:"greencheckmark")
+                    }
+                    else if (statusCode == 200)
+                    {
+                        couponStatus = "Coupon has been used already"
+                        couponMessage = ""
+                        imageView.image = UIImage(named:"redx")
+                    }
+                    else
+                    {
+                        couponStatus = "Coupon is invalid"
+                        couponMessage = ""
+                        imageView.image = UIImage(named:"redx")
+                    }
+                    
+                    let alertPrompt = UIAlertController(title: couponStatus, message: couponMessage, preferredStyle: .actionSheet)
+                    
+                    alertPrompt.view.addSubview(imageView)
+                    alertPrompt.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.cancel, handler: nil))
+                    var height:NSLayoutConstraint = NSLayoutConstraint(item: alertPrompt.view, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: self.view.frame.height * 0.50)
+                    alertPrompt.view.addConstraint(height);
+                    self.present(alertPrompt, animated: true, completion: nil)
                 }
             }
         })
@@ -144,6 +193,7 @@ extension QRScannerController: AVCaptureMetadataOutputObjectsDelegate {
             if metadataObj.stringValue != nil {
                 launchApp(decodedURL: metadataObj.stringValue!)
                 messageLabel.text = metadataObj.stringValue
+                
             }
         }
     }
